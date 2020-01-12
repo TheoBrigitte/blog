@@ -1,4 +1,4 @@
-baseURL = "http://blog.theobrigitte.com/"
+baseURL = "https://blog.theobrigitte.com/"
 languageCode = "en-us"
 title = "Theo's blog"
 theme = "ezhil"
