@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Let's Encrypt wildcard certificates - Theo's blog</title><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:title" content="Let's Encrypt wildcard certificates"><meta property="og:description" content="Setup wildcard certificate with let's encrypt and certbot"><meta property="og:type" content="article"><meta property="og:url" content="https://blog.theobrigitte.com/posts/letsencrypt-wildcard/"><meta property="article:published_time" content="2020-01-12T23:11:58+01:00"><meta property="article:modified_time" content="2020-01-12T23:11:58+01:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Let's Encrypt wildcard certificates"><meta name=twitter:description content="Setup wildcard certificate with let's encrypt and certbot"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://blog.theobrigitte.com/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://blog.theobrigitte.com/css/main.css><link rel=stylesheet type=text/css href=https://blog.theobrigitte.com/css/dark.css><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><script src=https://blog.theobrigitte.com/js/main.js></script></head><body><div class="container wrapper post"><div class=header><h1 class=site-title><a href=https://blog.theobrigitte.com/>Theo's blog</a></h1><div class=site-description><h2>A place for my technical adventures</h2><nav class="nav social"><ul class=flat><a href=https://github.com/TheoBrigitte title=Github><i data-feather=github></i></a></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>Posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post-header><h1 class=title>Let's Encrypt wildcard certificates</h1><div class=meta>Posted at &mdash; Jan 12, 2020</div></div><div class=markdown><h2 id=install-certbot>Install certbot</h2><p>Certbot is the official command line tool to manage Let's Encrypt certificates.</p><p>Since certbot is a python application, it is best to install it via python packet manager: pip.</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># pip install certbot
+
+</code></pre></div><p>In order to issue wildcard certificates you need to use DNS authentication method. Certbot has many DNS providers covered, you can list them with: <code>certbot plugins</code></p><p>I will continue using OVH as DNS provider.</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># pip install certbot-dns-ovh
+</code></pre></div><h2 id=create-an-account>Create an account</h2><p>Before being able to issue certificates, you need to create an account, certbot has you covered.</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># certbot register
+</code></pre></div><h2 id=issue-wildcard-certificate>Issue wildcard certificate</h2><p>First check how to use your dns plugin</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># certbot -h dns-ovh
+usage: 
+  certbot [SUBCOMMAND] [options] [-d DOMAIN] [-d DOMAIN] ...
+
+Certbot can obtain and install HTTPS/TLS/SSL certificates.  By default,
+it will attempt to use a webserver both for obtaining and installing the
+certificate. 
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONFIG_FILE, --config CONFIG_FILE
+                        path to config file (default: /etc/letsencrypt/cli.ini
+                        and ~/.config/letsencrypt/cli.ini)
+
+dns-ovh:
+  Obtain certificates using a DNS TXT record (if you are using OVH for DNS).
+
+  --dns-ovh-propagation-seconds DNS_OVH_PROPAGATION_SECONDS
+                        The number of seconds to wait for DNS to propagate
+                        before asking the ACME server to verify the DNS
+                        record. (default: 30)
+  --dns-ovh-credentials DNS_OVH_CREDENTIALS
+                        OVH credentials INI file. (default: None)
+</code></pre></div><p>According to documentation <a href=https://certbot.eff.org/docs/using.html#dns-plugins,>https://certbot.eff.org/docs/using.html#dns-plugins,</a> I need to create a file with my OVH credential in the following format:</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># OVH API credentials used by Certbot
+dns_ovh_endpoint = ovh-eu
+dns_ovh_application_key = MDAwMDAwMDAwMDAw
+dns_ovh_application_secret = MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
+dns_ovh_consumer_key = MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
+</code></pre></div><p>Now I can generate my certificate by using:</p><div class=highlight><pre style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># certbot certonly --dns-ovh --dns-ovh-credentials ./ovh_credentials.conf -d &#39;theobrigitte.com&#39; -d &#39;*.theobrigitte.com&#39; 
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator dns-ovh, Installer None
+Obtaining a new certificate
+Performing the following challenges:
+dns-01 challenge for theobrigitte.com
+dns-01 challenge for theobrigitte.com
+Waiting 30 seconds for DNS changes to propagate
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/theobrigitte.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/theobrigitte.com/privkey.pem
+   Your cert will expire on 2020-01-12. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   &#34;certbot renew&#34;
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let&#39;s Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+</code></pre></div><p>Happy encryption :)</p></div><div class=post-tags></div></div><div class="footer wrapper"><nav class=nav><div>© Copyright notice | <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div><script>feather.replace()</script></body></html>
