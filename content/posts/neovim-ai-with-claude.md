@@ -1,44 +1,49 @@
 ---
 title: "NeoVim AI with Claude"
 date: 2025-10-01T22:40:28+02:00
-description: "Setup NeoVIM with Claude Code"
+description: "Setup NeoVim with Claude Code"
 ---
 
-Make the magic AI happen without leaving nvim
+Bring AI-powered coding assistance directly into NeoVim without leaving your editor.
 
-### Install Claude Code
+{{- (resources.Get "neovim-claude-code.png").RelPermalink -}}
 
-Installing the Claude Code CLI, https://www.claude.com/product/claude-code
+## Install Claude Code
 
-```
+First, install the Claude Code CLI from https://www.claude.com/product/claude-code
+
+```bash
+# Using npm
 npm install -g @anthropic-ai/claude-code
-or for Arch user only
-yay -Sy claude-code https://aur.archlinux.org/packages/claude-code
-claude # setup with API Usage Billing and token from https://console.anthropic.com/settings/keys
+
+# Or for Arch Linux users
+yay -S claude-code # https://aur.archlinux.org/packages/claude-code
+
+# Setup authentication
+claude # Follow prompts to configure API key from https://console.anthropic.com/settings/keys
 ```
 
-### Setup NeoVIM
+## Setup NeoVim
 
-As for plugin went with [greggh/claude-code.nvim](https://github.com/greggh/claude-code.nvim#readme) which has window navigation, buffer updates, claude cli flags and felt better integrated overall than (coder/claudecode.nvim)[https://github.com/coder/claudecode.nvim].
+I chose [greggh/claude-code.nvim](https://github.com/greggh/claude-code.nvim#readme) as it provides better integration with window navigation, buffer updates, and Claude CLI flags compared to [coder/claudecode.nvim](https://github.com/coder/claudecode.nvim).
 
-Just copy the [configuration](https://github.com/greggh/claude-code.nvim#configuration) to some lua file (e.g. init.lua) in your vim config. You also need to add the claude-code plugin and its dependency:
+Add the plugin and its dependency to your plugin manager. For example, using [vim-plug](https://github.com/junegunn/vim-plug):
 
-e.g. using [vim plug](https://github.com/junegunn/vim-plug)
-
-```
+```vim
 Plug 'nvim-lua/plenary.nvim'
 Plug 'greggh/claude-code.nvim'
 ```
 
-### Github MCP Setup
+Then copy the [configuration](https://github.com/greggh/claude-code.nvim#configuration) into your Lua config file (e.g., `init.lua`).
 
-Here is the [official doc(https://docs.claude.com/en/docs/claude-code/mcp).
+## GitHub MCP Setup
 
-Here is an example adding the [Github MCP server](https://github.com/github/github-mcp-server)
-Using the `user` scope here, meaning it will be available all the time in any project. Also make sure your github token is set in the `GITHUB_TOKEN` env var.
+The [Model Context Protocol (MCP)](https://docs.claude.com/en/docs/claude-code/mcp) extends Claude Code's capabilities by connecting it to external tools and services.
 
-```
-cat <<EOF > github.mcp.json
+Here's how to add the [GitHub MCP server](https://github.com/github/github-mcp-server). This uses the `user` scope, making it available across all projects. Make sure your GitHub token is set in the `GITHUB_TOKEN` environment variable.
+
+```bash
+cat <<EOF > github-mcp.json
 {
   "type": "http",
   "url": "https://api.githubcopilot.com/mcp/",
@@ -47,13 +52,18 @@ cat <<EOF > github.mcp.json
   }
 }
 EOF
+
 claude mcp add-json --scope user github "$(jq -cM . github-mcp.json)"
 claude mcp list
+```
+
+Expected output:
+```
 Checking MCP server health...
 
 github: https://api.githubcopilot.com/mcp/ (HTTP) - ✓ Connected
 ```
 
-Here we go you are all set!
+You're all set! Claude Code is now integrated with NeoVim and can access GitHub through MCP.
 
-I am running a slightly [modified version](https://github.com/greggh/claude-code.nvim/pull/79) which allow for custom window navigation keymap. :theo:
+**Note:** I'm running a [modified version](https://github.com/greggh/claude-code.nvim/pull/79) that allows custom window navigation keymaps.
