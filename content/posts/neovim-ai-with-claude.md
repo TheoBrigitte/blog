@@ -6,7 +6,7 @@ description: "Setup NeoVim with Claude Code"
 
 Bring AI-powered coding assistance directly into NeoVim without leaving your editor.
 
-{{- (resources.Get "neovim-claude-code.png").RelPermalink -}}
+![NeoVim with Claude Code](/neovim-claude-code.png)
 
 ## Install Claude Code
 
