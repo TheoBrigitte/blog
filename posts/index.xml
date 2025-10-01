@@ -1,8 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Theo's blog</title><link>https://blog.theobrigitte.com/posts/</link><description>Recent content in Posts on Theo's blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>© Copyright notice</copyright><lastBuildDate>Wed, 01 Oct 2025 22:40:28 +0200</lastBuildDate><atom:link href="https://blog.theobrigitte.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>NeoVim AI with Claude</title><link>https://blog.theobrigitte.com/posts/neovim-ai-with-claude/</link><pubDate>Wed, 01 Oct 2025 22:40:28 +0200</pubDate><guid>https://blog.theobrigitte.com/posts/neovim-ai-with-claude/</guid><description>Make the magic AI happen without leaving nvim
-Install Claude Code Installing the Claude Code CLI, https://www.claude.com/product/claude-code
-npm install -g @anthropic-ai/claude-code or for Arch user only yay -Sy claude-code https://aur.archlinux.org/packages/claude-code claude # setup with API Usage Billing and token from https://console.anthropic.com/settings/keys Setup NeoVIM As for plugin went with greggh/claude-code.nvim which has window navigation, buffer updates, claude cli flags and felt better integrated overall than (coder/claudecode.nvim)[https://github.com/coder/claudecode.nvim].
-Just copy the configuration to some lua file (e.</description></item><item><title>Let's Encrypt wildcard certificates</title><link>https://blog.theobrigitte.com/posts/letsencrypt-wildcard/</link><pubDate>Sun, 12 Jan 2020 23:11:58 +0100</pubDate><guid>https://blog.theobrigitte.com/posts/letsencrypt-wildcard/</guid><description>Install certbot Certbot is the official command line tool to manage Let's Encrypt certificates.
-Since certbot is a python application, it is best to install it via python packet manager: pip.
-# pip install certbot In order to issue wildcard certificates you need to use DNS authentication method. Certbot has many DNS providers covered, you can list them with: certbot plugins
-I will continue using OVH as DNS provider.
-# pip install certbot-dns-ovh Create an account Before being able to issue certificates, you need to create an account, certbot has you covered.</description></item><item><title>Hello blog</title><link>https://blog.theobrigitte.com/posts/hello/</link><pubDate>Wed, 08 Jan 2020 22:01:58 +0100</pubDate><guid>https://blog.theobrigitte.com/posts/hello/</guid><description>Hello blog :)</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Theo's blog</title><link>https://blog.theobrigitte.com/posts/</link><description>Recent content in Posts on Theo's blog</description><generator>Hugo</generator><language>en</language><copyright>© Copyright notice</copyright><lastBuildDate>Wed, 01 Oct 2025 22:40:28 +0200</lastBuildDate><atom:link href="https://blog.theobrigitte.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>NeoVim AI with Claude</title><link>https://blog.theobrigitte.com/posts/neovim-ai-with-claude/</link><pubDate>Wed, 01 Oct 2025 22:40:28 +0200</pubDate><guid>https://blog.theobrigitte.com/posts/neovim-ai-with-claude/</guid><description>&lt;p&gt;Bring AI-powered coding assistance directly into NeoVim without leaving your editor.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.theobrigitte.com/neovim-claude-code.png" alt="NeoVim with Claude Code"&gt;&lt;/p&gt;
+&lt;h2 id="install-claude-code"&gt;
+ Install Claude Code
+ &lt;a class="heading-link" href="#install-claude-code"&gt;
+ &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
+ &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
+ &lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;First, install the Claude Code CLI from &lt;a href="https://www.claude.com/product/claude-code" class="external-link" target="_blank" rel="noopener"&gt;https://www.claude.com/product/claude-code&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#8b949e;font-style:italic"&gt;# Using npm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install -g @anthropic-ai/claude-code
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#8b949e;font-style:italic"&gt;# Or for Arch Linux users&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yay -S claude-code &lt;span style="color:#8b949e;font-style:italic"&gt;# https://aur.archlinux.org/packages/claude-code&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#8b949e;font-style:italic"&gt;# Setup authentication&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;claude &lt;span style="color:#8b949e;font-style:italic"&gt;# Follow prompts to configure API key from https://console.anthropic.com/settings/keys&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="setup-neovim"&gt;
+ Setup NeoVim
+ &lt;a class="heading-link" href="#setup-neovim"&gt;
+ &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
+ &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
+ &lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;I chose &lt;a href="https://github.com/greggh/claude-code.nvim#readme" class="external-link" target="_blank" rel="noopener"&gt;greggh/claude-code.nvim&lt;/a&gt; as it provides better integration with window navigation, buffer updates, and Claude CLI flags compared to &lt;a href="https://github.com/coder/claudecode.nvim" class="external-link" target="_blank" rel="noopener"&gt;coder/claudecode.nvim&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Let's Encrypt wildcard certificates</title><link>https://blog.theobrigitte.com/posts/letsencrypt-wildcard/</link><pubDate>Sun, 12 Jan 2020 23:11:58 +0100</pubDate><guid>https://blog.theobrigitte.com/posts/letsencrypt-wildcard/</guid><description>&lt;h2 id="install-certbot"&gt;
+ Install certbot
+ &lt;a class="heading-link" href="#install-certbot"&gt;
+ &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
+ &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
+ &lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;Certbot is the official command line tool to manage Let&amp;rsquo;s Encrypt certificates.&lt;/p&gt;
+&lt;p&gt;Since certbot is a python application, it is best to install it via python packet manager: pip.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;# pip install certbot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In order to issue wildcard certificates you need to use DNS authentication method. Certbot has many DNS providers covered, you can list them with: &lt;code&gt;certbot plugins&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I will continue using OVH as DNS provider.&lt;/p&gt;</description></item><item><title>Hello blog</title><link>https://blog.theobrigitte.com/posts/hello/</link><pubDate>Wed, 08 Jan 2020 22:01:58 +0100</pubDate><guid>https://blog.theobrigitte.com/posts/hello/</guid><description>&lt;p&gt;Hello blog :)&lt;/p&gt;</description></item></channel></rss>
