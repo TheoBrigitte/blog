@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Let&#39;s Encrypt wildcard certificates · Theo&#39;s Log
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Théo Brigitte">
+<meta name="description" content="Setup wildcard certificate with let&#39;s encrypt and certbot">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Let&#39;s Encrypt wildcard certificates">
+  <meta name="twitter:description" content="Setup wildcard certificate with let&#39;s encrypt and certbot">
+
+<meta property="og:url" content="http://localhost:1313/posts/letsencrypt-wildcard/">
+  <meta property="og:site_name" content="Theo&#39;s Log">
+  <meta property="og:title" content="Let&#39;s Encrypt wildcard certificates">
+  <meta property="og:description" content="Setup wildcard certificate with let&#39;s encrypt and certbot">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-01-12T23:11:58+01:00">
+    <meta property="article:modified_time" content="2020-01-12T23:11:58+01:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/letsencrypt-wildcard/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Theo&#39;s Log
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/">home</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">posts</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/letsencrypt-wildcard/">
+              Let&#39;s Encrypt wildcard certificates
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-01-12T23:11:58&#43;01:00">
+                January 12, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="install-certbot">
+  Install certbot
+  <a class="heading-link" href="#install-certbot">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Certbot is the official command line tool to manage Let&rsquo;s Encrypt certificates.</p>
+<p>Since certbot is a python application, it is best to install it via python packet manager: pip.</p>
+<pre tabindex="0"><code># pip install certbot
+</code></pre><p>In order to issue wildcard certificates you need to use DNS authentication method. Certbot has many DNS providers covered, you can list them with: <code>certbot plugins</code></p>
+<p>I will continue using OVH as DNS provider.</p>
+<pre tabindex="0"><code># pip install certbot-dns-ovh
+</code></pre><h2 id="create-an-account">
+  Create an account
+  <a class="heading-link" href="#create-an-account">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Before being able to issue certificates, you need to create an account, certbot has you covered.</p>
+<pre tabindex="0"><code># certbot register
+</code></pre><h2 id="issue-wildcard-certificate">
+  Issue wildcard certificate
+  <a class="heading-link" href="#issue-wildcard-certificate">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>First check how to use your dns plugin</p>
+<pre tabindex="0"><code># certbot -h dns-ovh
+usage: 
+  certbot [SUBCOMMAND] [options] [-d DOMAIN] [-d DOMAIN] ...
+
+Certbot can obtain and install HTTPS/TLS/SSL certificates.  By default,
+it will attempt to use a webserver both for obtaining and installing the
+certificate. 
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONFIG_FILE, --config CONFIG_FILE
+                        path to config file (default: /etc/letsencrypt/cli.ini
+                        and ~/.config/letsencrypt/cli.ini)
+
+dns-ovh:
+  Obtain certificates using a DNS TXT record (if you are using OVH for DNS).
+
+  --dns-ovh-propagation-seconds DNS_OVH_PROPAGATION_SECONDS
+                        The number of seconds to wait for DNS to propagate
+                        before asking the ACME server to verify the DNS
+                        record. (default: 30)
+  --dns-ovh-credentials DNS_OVH_CREDENTIALS
+                        OVH credentials INI file. (default: None)
+</code></pre><p>According to documentation <a href="https://certbot.eff.org/docs/using.html#dns-plugins"  class="external-link" target="_blank" rel="noopener">https://certbot.eff.org/docs/using.html#dns-plugins</a>, I need to create a file with my OVH credential in the following format:</p>
+<pre tabindex="0"><code># OVH API credentials used by Certbot
+dns_ovh_endpoint = ovh-eu
+dns_ovh_application_key = MDAwMDAwMDAwMDAw
+dns_ovh_application_secret = MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
+dns_ovh_consumer_key = MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
+</code></pre><p>Now I can generate my certificate by using:</p>
+<pre tabindex="0"><code># certbot certonly --dns-ovh --dns-ovh-credentials ./ovh_credentials.conf -d &#39;theobrigitte.com&#39; -d &#39;*.theobrigitte.com&#39; 
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator dns-ovh, Installer None
+Obtaining a new certificate
+Performing the following challenges:
+dns-01 challenge for theobrigitte.com
+dns-01 challenge for theobrigitte.com
+Waiting 30 seconds for DNS changes to propagate
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/theobrigitte.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/theobrigitte.com/privkey.pem
+   Your cert will expire on 2020-01-12. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   &#34;certbot renew&#34;
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let&#39;s Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+</code></pre><p>Happy encryption :)</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2012 -
+    
+    2025
+     Théo Brigitte 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

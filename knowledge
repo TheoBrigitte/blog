@@ -1,0 +1,22 @@
+# What UNIX tools do I know
+
+- (neo)vim: my favorite text editor
+- zsh: default shell
+- tmux: shell multiplexer
+- git: reflog saved my life
+- go: because I am also a Go developer
+- fzf: navigate trough shell command history and filesystem
+- z: powerfull filesystem navigator
+- fd: to quickly find file/directories (faster than find)
+- ag: because grep is too slow
+- jq/yq: wrestling with json and yaml
+- gpg: crypto stuff
+- keybase: be social in the crypto space
+- kubectl: all purpose Kubernetes CLI
+- kubectx/kubens: more k8s CLIs
+- helm: because I have to manage k8s applications
+- flux: doing Kubernetes the GitOps way
+- gh/hub and Copilot: hard to avoid Github
+
+dotfiles: https://github.com/TheoBrigitte/dotfiles
+Vim config: https://github.com/TheoBrigitte/vim

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/theo/.local/bin/**)",
+      "Read(//home/theo/.local/lib/boot-manager/**)",
+      "Read(//home/theo/projects/trk/**)",
+      "Read(//home/theo/projects/mcp-time/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

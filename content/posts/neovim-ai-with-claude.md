@@ -1,5 +1,5 @@
 ---
-title: "NeoVim AI with Claude"
+title: "Setup NeoVim AI with Claude"
 date: 2025-10-01T22:40:28+02:00
 description: "Setup NeoVim with Claude Code"
 ---

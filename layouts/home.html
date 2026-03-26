@@ -1,0 +1,65 @@
+{{ define "content" }}
+{{ $styles := resources.Get "css/about.css" | minify }}
+<link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+  <section class="container list">
+    <header>
+      <section class="container centered">
+        <div style="line-height: 1.42">
+          <div class="about">
+            {{ partialCached "home/author.html" . }}
+            {{ .Content }}
+          </div>
+        </div>
+        {{ partialCached "home/extensions.html" . }}
+      </section>
+    </header>
+    <div class="centered info">
+      <ul class="key">
+        <li>Profession</li>
+        <li>Experience</li>
+        <li>Languages</li>
+        <li>Cloud provider</li>
+        <li>AI</li>
+        <li>Security</li>
+        <li>Orchestration</li>
+        <li>Observability</li>
+        <li>Pager</li>
+        <li>Database</li>
+        <li>Web server</li>
+        <li>API</li>
+        <li>Version control</li>
+        <li>CI/CD</li>
+        <li>IaC</li>
+        <li>OS</li>
+        <li>Shell</li>
+        <li>Editor</li>
+      </ul>
+      <ul class="value">
+        <li>Software Developer</li>
+        <li>12 years</li>
+        <li>Go, Bash</li>
+        <li>AWS, Azure, GCP, Oracle, OVH<li>
+        <li>MCP servers, Claude Code</li>
+        <li>SOPS, Vault</li>
+        <li>Kubernetes, Docker</li>
+        <li>Grafana, Prometheus, OpenTelemetry</li>
+        <li>OpsGenie, PagerDuty</li>
+        <li>PostgreSQL</li>
+        <li>Nginx</li>
+        <li>REST, gRPC</li>
+        <li>Git</li>
+        <li>FluxCD, Github Actions, CircleCI</li>
+        <li>Terraform</li>
+        <li>Arch Linux</li>
+        <li>Zsh + tmux</li>
+        <li>Vim</li>
+      </ul>
+    </div>
+    <section class="container centered">
+      <div class="about">
+        {{ partialCached "home/social.html" . }}
+      </div>
+    </section>
+  </section>
+
+{{ end }}

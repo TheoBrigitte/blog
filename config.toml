@@ -1,9 +1,12 @@
 baseurl = "https://blog.theobrigitte.com/"
-title = "Theo's blog"
+title = "Theo's Log"
 theme = "hugo-coder"
 languagecode = "en"
 defaultcontentlanguage = "en"
 copyright = "© Copyright notice"
+
+[markup.goldmark.renderer]
+unsafe = true
 
 [pagination]
 pagerSize = 20
@@ -13,14 +16,11 @@ style = "github-dark"
 
 [params]
   author = "Théo Brigitte"
-  info = "A developer and tech enthusiast sharing knowledge and experiences."
-  description = "Théo Brigitte's personal website"
+  description = "Théo Brigitte's personal log"
   keywords = "blog,developer,personal"
   gravatar = "theo.brigitte@gmail.com"
 
-  faviconSVG = "/img/favicon.svg"
-  favicon_32 = "/img/favicon-32x32.png"
-  favicon_16 = "/img/favicon-16x16.png"
+  faviconSVG = "/favicon.ico"
 
   since = 2012
 
@@ -42,12 +42,24 @@ style = "github-dark"
   url = "https://github.com/TheoBrigitte"
   weight = 1
 
-# Menu links
-[[menu.main]]
-  name = "Blog"
-  weight = 1
-  url  = "posts/"
-[[menu.main]]
-  name = "About"
+[[params.social]]
+  name = "LinkedIn"
+  icon = "fa-brands fa-linkedin fa-2x"
+  url = "https://www.linkedin.com/in/th%C3%A9o-brigitte-a4326175/"
   weight = 2
-  url = "about/"
+
+[[params.social]]
+  name = "CV"
+  icon = "fa-solid fa-file-code fa-2x"
+  url = "https://theobrigitte.com/cv.pdf"
+  weight = 3
+
+# menu links
+[[menu.main]]
+  name = "home"
+  weight = 1
+  url = "/"
+[[menu.main]]
+  name = "posts"
+  weight = 2
+  url = "posts/"

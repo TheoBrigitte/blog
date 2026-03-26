@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Théo Brigitte on Theo&#39;s Log</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Théo Brigitte on Theo&#39;s Log</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>© Copyright notice</copyright>
+    <lastBuildDate>Mon, 06 Oct 2025 22:11:33 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enabling gRPC API for Grafana Tempo</title>
+      <link>http://localhost:1313/posts/tempo-grpc/</link>
+      <pubDate>Mon, 06 Oct 2025 22:11:33 +0200</pubDate>
+      <guid>http://localhost:1313/posts/tempo-grpc/</guid>
+      <description>&lt;p&gt;When running Grafana Tempo in a distributed Kubernetes environment, exposing both HTTP and gRPC APIs through ingress can significantly improve performance and flexibility for trace ingestion and querying. While the default Tempo gateway provides a convenient unified interface, directly exposing the distributor and querier services via NGINX ingress offers more control and better performance for gRPC-native clients.&lt;/p&gt;&#xA;&lt;p&gt;This guide walks through configuring NGINX ingress to expose Tempo&amp;rsquo;s gRPC endpoints alongside traditional HTTP APIs, enabling:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Setup NeoVim AI with Claude</title>
+      <link>http://localhost:1313/posts/neovim-ai-with-claude/</link>
+      <pubDate>Wed, 01 Oct 2025 22:40:28 +0200</pubDate>
+      <guid>http://localhost:1313/posts/neovim-ai-with-claude/</guid>
+      <description>&lt;p&gt;Bring AI-powered coding assistance directly into NeoVim without leaving your editor.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/neovim-claude-code.png&#34; alt=&#34;NeoVim with Claude Code&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;install-claude-code&#34;&gt;&#xA;  Install Claude Code&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#install-claude-code&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;First, install the Claude Code CLI from &lt;a href=&#34;https://www.claude.com/product/claude-code&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.claude.com/product/claude-code&lt;/a&gt;&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Using npm&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm install -g @anthropic-ai/claude-code&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Or for Arch Linux users&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yay -S claude-code &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# https://aur.archlinux.org/packages/claude-code&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Setup authentication&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;claude &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Follow prompts to configure API key from https://console.anthropic.com/settings/keys&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;setup-neovim&#34;&gt;&#xA;  Setup NeoVim&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#setup-neovim&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;I chose &lt;a href=&#34;https://github.com/greggh/claude-code.nvim#readme&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;greggh/claude-code.nvim&lt;/a&gt; as it provides better integration with window navigation, buffer updates, and Claude CLI flags compared to &lt;a href=&#34;https://github.com/coder/claudecode.nvim&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;coder/claudecode.nvim&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Brut-force attacks protection with fail2ban</title>
+      <link>http://localhost:1313/posts/fail2ban-nginx-botsearch/</link>
+      <pubDate>Thu, 20 Jun 2024 19:24:03 +0100</pubDate>
+      <guid>http://localhost:1313/posts/fail2ban-nginx-botsearch/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;&#xA;  Introduction&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#introduction&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;In this post I will show you how to use fail2ban to block requests from bots searching for vulnerabilities in your nginx server.&lt;/p&gt;&#xA;&lt;h2 id=&#34;install-fail2ban&#34;&gt;&#xA;  Install fail2ban&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#install-fail2ban&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;First you need to install fail2ban, on debian based systems you can do this with:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;apt install fail2ban&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;create-a-jail&#34;&gt;&#xA;  Create a jail&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#create-a-jail&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Create a custom jail file in &lt;code&gt;/etc/fail2ban/jail.d/nginx-botsearch.local&lt;/code&gt; with the following content:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to profile your Go application with pprof</title>
+      <link>http://localhost:1313/posts/go-pprof/</link>
+      <pubDate>Sun, 12 Jan 2020 23:11:58 +0100</pubDate>
+      <guid>http://localhost:1313/posts/go-pprof/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;&#xA;  Intro&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#intro&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Profiling is a way to measure the performance of your application. It can help you identify bottlenecks like memory leaks and optimize your code.&lt;/p&gt;&#xA;&lt;p&gt;In this article, I will take Grafana &lt;a href=&#34;https://github.com/grafana/alloy&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alloy&lt;/a&gt; as an example.&lt;/p&gt;&#xA;&lt;h2 id=&#34;intrument-your-code&#34;&gt;&#xA;  Intrument your code&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#intrument-your-code&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Intrumenting you Go application with profiling and exposing it via http is easy, it boils down to a single line of code :&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Let&#39;s Encrypt wildcard certificates</title>
+      <link>http://localhost:1313/posts/letsencrypt-wildcard/</link>
+      <pubDate>Sun, 12 Jan 2020 23:11:58 +0100</pubDate>
+      <guid>http://localhost:1313/posts/letsencrypt-wildcard/</guid>
+      <description>&lt;h2 id=&#34;install-certbot&#34;&gt;&#xA;  Install certbot&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#install-certbot&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Certbot is the official command line tool to manage Let&amp;rsquo;s Encrypt certificates.&lt;/p&gt;&#xA;&lt;p&gt;Since certbot is a python application, it is best to install it via python packet manager: pip.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# pip install certbot&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In order to issue wildcard certificates you need to use DNS authentication method. Certbot has many DNS providers covered, you can list them with: &lt;code&gt;certbot plugins&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;I will continue using OVH as DNS provider.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hello blog</title>
+      <link>http://localhost:1313/posts/hello/</link>
+      <pubDate>Wed, 08 Jan 2020 22:01:58 +0100</pubDate>
+      <guid>http://localhost:1313/posts/hello/</guid>
+      <description>&lt;p&gt;Hello blog :)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
